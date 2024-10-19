@@ -51,7 +51,9 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/data");
+      const response = await axios.get(
+        "https://animated-octo-guacamole.vercel.app/api/data"
+      );
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -65,10 +67,13 @@ const App = () => {
       const randomIndex = Math.floor(Math.random() * sentences.length);
       const { title, description } = sentences[randomIndex];
 
-      await axios.post("http://localhost:5000/api/generate", {
-        title,
-        description,
-      });
+      await axios.post(
+        "https://animated-octo-guacamole.vercel.app/api/generate",
+        {
+          title,
+          description,
+        }
+      );
       pollForUpdate(); // Start polling after generating data
     } catch (error) {
       console.error("Error generating data:", error);
@@ -77,7 +82,9 @@ const App = () => {
 
   const pollForUpdate = async () => {
     const interval = setInterval(async () => {
-      const response = await axios.get("http://localhost:5000/api/data");
+      const response = await axios.get(
+        "https://animated-octo-guacamole.vercel.app/api/data"
+      );
       const updatedData = response.data;
 
       const allUpdated = updatedData.every(
